@@ -32,8 +32,8 @@ def arg_parse():
         help="video / Directory containing videos to perform detection upon", 
         type=str
     )
-    parser.add_argument("--config", default="/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/yolov3.cfg",help="YOLO config path")
-    parser.add_argument("--weights", default="/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/yolov3.weights", help="YOLO weights path")
+    parser.add_argument("--config", default="yolov3.cfg",help="YOLO config path")
+    parser.add_argument("--weights", default="yolov3.weights", help="YOLO weights path")
     return parser.parse_args()
 
 
@@ -332,26 +332,26 @@ yolov3=cv2.dnn.readNet(args.config, args.weights)
 
 #save COCO object categories in the list 
 classes=[]
-with open("/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/coco.names","r")as c:
+with open("coco.names","r")as c:
     classes= c.read().splitlines()
 layers_names= yolov3.getLayerNames()
 colors=np.random.uniform(0,255,size=(len(classes),3))
 
 # load autoencoder model
-json_file = open('/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/convautoencodermodel_10.json', 'r')
+json_file = open('convautoencodermodel_10.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
-loaded_model.load_weights("/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/convautoencodermodel_10.h5")
+loaded_model.load_weights("convautoencodermodel_10.h5")
 
 # load player idintificatio model
 model=torch.hub.load('ultralytics/yolov5', 'custom',path='/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/yolov5ID_640_100epoch.pt') 
-model.load_state_dict(torch.load('/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/yolov5ID_640_100epoch.pt')['model'].state_dict(),strict=False)
+model.load_state_dict(torch.load('yolov5ID_640_100epoch.pt')['model'].state_dict(),strict=False)
 
 # load foootball detection model
 ballmodel=torch.hub.load('ultralytics/yolov5', 'custom',path='/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/balldetection640_100epoch.pt') 
-ballmodel.load_state_dict(torch.load('/Users/ragadalhejaily/Documents/finalproject/code/last_project_code/models/balldetection640_100epoch.pt')['model'].state_dict(),strict=False)
+ballmodel.load_state_dict(torch.load('balldetection640_100epoch.pt')['model'].state_dict(),strict=False)
 print("[INFO] train kmeans for team recognation . ")
 
 capture =read_video(args.videos)
