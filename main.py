@@ -126,13 +126,13 @@ def detect_persons_in_one_frame_for_k_mean(frame):
 
 
 def yolov5(img):
-    im = array_to_img(img)
-    output = model(im)
-    results = output.pandas().xyxy[0].to_dict(orient="records")
-    for result in results:
-        con = result['confidence']
-        cs = result['class']
-        return cs
+    # im = array_to_img(img)
+    # output = model(im)
+    # results = output.pandas().xyxy[0].to_dict(orient="records")
+    # for result in results:
+    #     con = result['confidence']
+    #     cs = result['class']
+        return 5
 
 
 def balldetection(frame):
