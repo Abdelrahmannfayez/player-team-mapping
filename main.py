@@ -125,14 +125,14 @@ def detect_persons_in_one_frame_for_k_mean(frame):
         return image2
 
 
-def yolov5(img):
-    # im = array_to_img(img)
-    # output = model(im)
-    # results = output.pandas().xyxy[0].to_dict(orient="records")
-    # for result in results:
-    #     con = result['confidence']
-    #     cs = result['class']
-        return 5
+# def yolov5(img):
+#     im = array_to_img(img)
+#     output = model(im)
+#     results = output.pandas().xyxy[0].to_dict(orient="records")
+#     for result in results:
+#         con = result['confidence']
+#         cs = result['class']
+#         return 5
 
 
 def balldetection(frame):
@@ -238,30 +238,30 @@ def detect_persons_in_one_frame_for_k_mean_pridectwithyolov5(frame):
                     if cluster_no == counter.most_common()[0][0]:
                         x2, y2, w2, h2 = person[k]
                         crop_img2 = frame[y2:y2 + h2, x2:x2 + w2]
-                        num = yolov5(crop_img2)
-                        if num == None:
-                            label = "T2- UN "
-                            cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (160, 0, 0), 2)
-                            cv2.putText(frame, label, (x2, y2), font, 1, (160, 0, 0), 2)
-                        else:
-                            label = "T2- " + str(num)
-                            cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (160, 0, 0), 2)
-                            cv2.putText(frame, label, (x2, y2), font, 1, (160, 0, 0), 2)
+                        # num = yolov5(crop_img2)
+                        # if num == None:
+                        label = "T2"
+                        cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (160, 0, 0), 2)
+                        cv2.putText(frame, label, (x2, y2), font, 1, (160, 0, 0), 2)
+                        # else:
+                        #     label = "T2- " + str(num)
+                        #     cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (160, 0, 0), 2)
+                        #     cv2.putText(frame, label, (x2, y2), font, 1, (160, 0, 0), 2)
 
                     if cluster_no == counter.most_common()[1][0]:
 
                         x3, y3, w3, h3 = person[k]
                         crop_img2 = frame[y3:y3 + h3, x3:x3 + w3]
 
-                        num = yolov5(crop_img2)
-                        if num == None:
-                            label = "T1- UN "
-                            cv2.rectangle(frame, (x3, y3), (x3 + w3, y3 + h3), (220, 220, 220), 2)
-                            cv2.putText(frame, label, (x3, y3), font, 1, (220, 220, 220), 2)
-                        else:
-                            label = "T1- " + str(num)
-                            cv2.rectangle(frame, (x3, y3), (x3 + w3, y3 + h3), (220, 220, 220), 2)
-                            cv2.putText(frame, label, (x3, y3), font, 1, (220, 220, 220), 2)
+                        # num = yolov5(crop_img2)
+                        # if num == None:
+                        label = "T1"
+                        cv2.rectangle(frame, (x3, y3), (x3 + w3, y3 + h3), (220, 220, 220), 2)
+                        cv2.putText(frame, label, (x3, y3), font, 1, (220, 220, 220), 2)
+                        # else:
+                        #     label = "T1- " + str(num)
+                        #     cv2.rectangle(frame, (x3, y3), (x3 + w3, y3 + h3), (220, 220, 220), 2)
+                        #     cv2.putText(frame, label, (x3, y3), font, 1, (220, 220, 220), 2)
 
                     if clusters[k] == counter.most_common()[2][0]:
                         x4, y4, w4, h4 = person[k]
